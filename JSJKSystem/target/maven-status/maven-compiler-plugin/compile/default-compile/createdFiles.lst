@@ -1,0 +1,7 @@
+com\jsjk\mapper\RegisterMapper.class
+com\jsjk\controller\BaseController.class
+com\jsjk\pojo\UserBase.class
+com\jsjk\controller\RegisterController.class
+com\jsjk\service\RegisterService.class
+com\jsjk\service\RegisterServiceImpl.class
+com\jsjk\controller\HomeController.class
