@@ -43,12 +43,12 @@ public class UserBase {
 		this.userPassword = userPassword;
 	}
 	
-	public int getUserBothYear() {
+	public int getUserBirthYear() {
 		return userBirthYear;
 	}
 	
-	public void setUserBothYear(int userBothYear) {
-		this.userBirthYear = userBothYear;
+	public void setUserBirthYear(int userbirthYear) {
+		this.userBirthYear = userbirthYear;
 	}
 	
 	public int getUserHeight() {
@@ -75,14 +75,14 @@ public class UserBase {
 		this.userPhone = userPhone;
 	}
 	/*
-	public UserBase(int userId, String userName, String userNickname, String userPassword, int userBothYear,
+	public UserBase(int userId, String userName, String userNickname, String userPassword, int userbirthYear,
 			int userHeight, String userPhone) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
 		this.userNickname = userNickname;
 		this.userPassword = userPassword;
-		this.userBirthYear = userBothYear;
+		this.userBirthYear = userbirthYear;
 		this.userHeight = userHeight;
 		this.userPhone = userPhone;
 	}
