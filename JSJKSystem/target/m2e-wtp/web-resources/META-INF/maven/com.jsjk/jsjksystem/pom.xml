@@ -10,8 +10,8 @@
   
   <!-- 集中定义依赖版本号 -->
 	<properties>
-		<maven.compiler.source>1.7</maven.compiler.source>
-    	<maven.compiler.target>1.7</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+    	<maven.compiler.target>1.8</maven.compiler.target>
 	
 		<!-- <自定义的版本名称 junit.version> -->
 		<junit.version>4.12</junit.version>
