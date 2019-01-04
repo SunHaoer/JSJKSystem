@@ -14,7 +14,7 @@ public class RegisterController extends BaseController {
 	private RegisterService registerService;
 	
 	/**
-	 * 转向tilte标题栏页面
+	 * 转向注册页面
 	 * @return
 	 */
 	@RequestMapping("/toregister")
@@ -28,13 +28,13 @@ public class RegisterController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value="/register")
-	public String register(UserBase user){		//转向tilte标题栏页面
+	public String register(UserBase user){		
 		//System.out.println("1\n\n\n\n");
 		if(registerService.notExistUserName(user.getUserName()) && registerService.notExistPhone(user.getUserPhone())) {
 			System.out.println(user + "\n\n");
 			registerService.saveRegister(user);
 		}
-		return "/login";
+		return "/index";
 	}
 	
 }
