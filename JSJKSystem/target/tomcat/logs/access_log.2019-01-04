@@ -7,3 +7,8 @@
 0:0:0:0:0:0:0:1 - - [04/Jan/2019:13:07:16 +0800] "GET /toregister.action HTTP/1.1" 200 950 http-bio-8120-exec-4 59
 0:0:0:0:0:0:0:1 - - [04/Jan/2019:13:07:31 +0800] "POST /register HTTP/1.1" 200 143 http-bio-8120-exec-6 3424
 0:0:0:0:0:0:0:1 - - [04/Jan/2019:13:07:33 +0800] "GET /tologin.action HTTP/1.1" 200 104 http-bio-8120-exec-7 10
+0:0:0:0:0:0:0:1 - - [04/Jan/2019:13:22:58 +0800] "GET / HTTP/1.1" 200 280 http-bio-8120-exec-1 103
+0:0:0:0:0:0:0:1 - - [04/Jan/2019:13:22:58 +0800] "GET /home.action HTTP/1.1" 200 143 http-bio-8120-exec-3 99
+0:0:0:0:0:0:0:1 - - [04/Jan/2019:13:22:59 +0800] "GET /toregister.action HTTP/1.1" 200 950 http-bio-8120-exec-4 57
+0:0:0:0:0:0:0:1 - - [04/Jan/2019:13:23:07 +0800] "POST /register HTTP/1.1" 200 143 http-bio-8120-exec-5 2755
+0:0:0:0:0:0:0:1 - - [04/Jan/2019:13:23:08 +0800] "GET /tologin.action HTTP/1.1" 200 104 http-bio-8120-exec-6 12
