@@ -30,7 +30,8 @@ public class RegisterServiceImpl implements RegisterService {
 	@Override
 	public void saveRegister(UserBase user) {
 		registerMapper.saveRegister(user);
-		System.out.println(user.toString() + "\n\n");
+		registerMapper.createUserDataTable("user_" + user.getUserId() + "_datatable");
+		System.out.println(user.getUserId() + "\n\n");
 	}
 
 }
