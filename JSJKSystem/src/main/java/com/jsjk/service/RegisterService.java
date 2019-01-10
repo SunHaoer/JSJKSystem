@@ -24,4 +24,15 @@ public interface RegisterService {
 	 */
 	public void saveRegister(UserBase user);
 	
+	/**
+	 * 产生验证码
+	 * @return
+	 */
+	public String createVerificationCode();
+	
+	/**
+	 * 向手机发送验证码
+	 */
+	public void getVerificationCode();
+	
 }

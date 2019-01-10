@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.jsjk.pojo.UserBase;
 import com.jsjk.service.RegisterService;
 
+import net.sf.json.JSONObject;
+
+
 @Controller
 public class RegisterController extends BaseController {
 	
@@ -35,6 +38,19 @@ public class RegisterController extends BaseController {
 			registerService.saveRegister(user);
 		}
 		return "/index";
+	}
+	
+	/**
+	 * 获取短信验证码
+	 */
+	@RequestMapping(value="/getVerificationCode")
+	public JSONObject getVerificationCode(String userPhone) {
+		System.out.println(userPhone + "获取短信验证码\n\n\n");
+		JSONObject jsonObject = new JSONObject();
+		String verificationCode = registerService.createVerificationCode();
+		registerService.getVerificationCode();
+		jsonObject.put("result", "true");
+		return jsonObject;
 	}
 	
 }

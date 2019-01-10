@@ -1,6 +1,21 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
+		<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+		<script type="text/javascript">
+			
+			function getCode() {
+				var userPhone = $("input[name='userPhone']").val();
+				$.ajax({
+					type: "GET", 
+					data: {userPhone: userPhone},
+					dataType: "json",
+ 					url: "${pageContext.request.contextPath}/getVerificationCode",
+ 					success: function() { alert("发送成功"); }
+				}); 
+				
+			}
+		</script>
 	</head>
 	<body>
 		<form action="${pageContext.request.contextPath}/register" method="post">
@@ -32,13 +47,13 @@
 			<tr>
 				<td>手机：</td>
 				<td><input type="text" name="userPhone" /></td>
+				<td><a onclick="getCode()" aria-label="Close">获取验证码</a></td>
 			</tr>	
 			<tr>
 				<input value='ok' type='submit'>
 			</tr>					
 		</table>
 		</form>
-
 	</body>
 </html>
 
