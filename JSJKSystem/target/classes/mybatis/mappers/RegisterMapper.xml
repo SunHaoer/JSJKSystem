@@ -44,6 +44,19 @@
   			PRIMARY KEY (`id`)
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8;
     </update>
-
+	
+	<select id="findUserByUserName" resultType="UserBase">
+		select * from user_base
+		where user_name=#{userName}
+		order by user_id
+		limit 1
+	</select>
+	
+	<select id="findUserByUserPhone" resultType="UserBase">
+		select * from user_base
+		where user_phone=#{userPhone}
+		order by user_id
+		limit 1
+	</select>
 
 </mapper>

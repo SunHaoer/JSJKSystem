@@ -18,4 +18,16 @@ public interface RegisterMapper {
 	 */
 	public void createUserDataTable(@Param("tableName")String tableName);
 	
+	/**
+	 * 根据userName查user
+	 * @param userName
+	 */
+	public UserBase findUserByUserName(@Param("userName") String userName);
+	
+	/**
+	 * 根据userPhone查user
+	 * @param userPhone
+	 */
+	public UserBase findUserByUserPhone(@Param("userPhone") String userPhone);
+	
 }

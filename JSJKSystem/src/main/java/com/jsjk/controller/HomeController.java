@@ -8,7 +8,7 @@ public class HomeController extends BaseController {
 	
 	@RequestMapping("/home")
 	public String home(){	//转向欢迎页面
-		System.out.println("home\n\n\n");
+		//System.out.println("home\n\n\n");
 		return "/index";
 	}
 
