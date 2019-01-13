@@ -20,7 +20,6 @@ public class UserBase {
 	}
 	
 	public String getUserName() {
-		System.out.println("0\n\n\n\n");
 		return userName;
 	} 
 	
@@ -74,19 +73,7 @@ public class UserBase {
 	public void setUserPhone(String userPhone) {
 		this.userPhone = userPhone;
 	}
-	/*
-	public UserBase(int userId, String userName, String userNickname, String userPassword, int userbirthYear,
-			int userHeight, String userPhone) {
-		super();
-		this.userId = userId;
-		this.userName = userName;
-		this.userNickname = userNickname;
-		this.userPassword = userPassword;
-		this.userBirthYear = userbirthYear;
-		this.userHeight = userHeight;
-		this.userPhone = userPhone;
-	}
-	*/
+
 	@Override
 	public String toString() {
 		return "UserBase [userId=" + userId + ", userName=" + userName + ", userNickname=" + userNickname
@@ -94,6 +81,12 @@ public class UserBase {
 				+ ", userPhone=" + userPhone + "]";
 	}
 	
-	
+	/**
+	 * user中各参数的非空验证
+	 * @return
+	 */
+	public boolean notNullValidation() {
+		return (userName != null) && (userNickname != null) && (userPassword != null) && (userBirthYear != 0) && (userHeight != 0) && (userWeight != 0) && (userPhone != null);
+	}
 
 }

@@ -6,12 +6,11 @@
 
 		
 	<!-- 动态的插入一条部门信息 -->
-	<insert id="saveRegister">
+	<insert id="saveRegister" useGeneratedKeys="true" keyProperty="userId" parameterType="com.jsjk.pojo.UserBase">
 	<!-- 
 	insert into user_base (user_name, user_nickname, user_password, user_birth_year, user_height, user_weight, user_phone)
 	values (1, 2, 3, 4, 5, 6, 7)
 	-->
-	
 		insert into user_base
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="userName != null">user_name,</if>
@@ -32,7 +31,32 @@
 			<if test="userWeight != null">#{userWeight},</if>
 			<if test="userPhone != null">#{userPhone},</if>
 		</trim>
-		
 	</insert>
+	
+	<update id="createUserDataTable">
+  		CREATE TABLE ${tableName} (
+  			`id` int(20) NOT NULL AUTO_INCREMENT,
+  			`data_body_temperature` int(20) DEFAULT NULL,
+  			`data_blood_fat` int(20) DEFAULT NULL,
+ 			`data_blood_pressure` int(20) DEFAULT NULL,
+  			`data_fatigue` int(20) DEFAULT NULL,
+ 			`data_time` datetime DEFAULT NULL,
+  			PRIMARY KEY (`id`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    </update>
+	
+	<select id="findUserByUserName" resultType="UserBase">
+		select * from user_base
+		where user_name=#{userName}
+		order by user_id
+		limit 1
+	</select>
+	
+	<select id="findUserByUserPhone" resultType="UserBase">
+		select * from user_base
+		where user_phone=#{userPhone}
+		order by user_id
+		limit 1
+	</select>
 
 </mapper>
