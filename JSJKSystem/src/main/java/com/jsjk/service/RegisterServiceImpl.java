@@ -62,12 +62,12 @@ public class RegisterServiceImpl implements RegisterService {
 	
 	@Override
 	public boolean userNameIsLegal(String userName) {
-		System.out.println(userName);
+//System.out.println(userName);
 		boolean flag = true;
 		UserBase userBase = registerMapper.findUserByUserName(userName);
-		System.out.println(userBase);
-		if(userBase == null) {
-			flag = true; 
+//System.out.println(userBase);
+		if(userBase != null) {
+			flag = false; 
 		}
 		return flag;
 	}

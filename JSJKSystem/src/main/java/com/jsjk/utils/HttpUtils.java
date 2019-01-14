@@ -31,11 +31,6 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-/**
- * 开源代码，用于服务端向手机发送验证码
- * @author https://github.com/aliyun/api-gateway-demo-sign-java/blob/master/src/main/java/com/aliyun/api/gateway/demo/util/HttpUtils.java
- *
- */
 public class HttpUtils {
 	
 	/**
@@ -304,6 +299,7 @@ public class HttpUtils {
             };
             ctx.init(null, new TrustManager[] { tm }, null);
             SSLSocketFactory ssf = new SSLSocketFactory(ctx);
+            ssf.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
             ClientConnectionManager ccm = httpClient.getConnectionManager();
             SchemeRegistry registry = ccm.getSchemeRegistry();
             registry.register(new Scheme("https", 443, ssf));
