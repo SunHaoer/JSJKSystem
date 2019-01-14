@@ -3,13 +3,17 @@
 	<head>
 		<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
 		<script type="text/javascript">
+			var uri1 = "http://www.wochi.xin/jsjksystem";
+			var uri2 = "${pageContext.request.contextPath}";
+			uri1 = uri2;
+			
 			function getPhoneVerificationCode() {
 				var userPhone = $("input[name='userPhone']").val();
 				$.ajax({
 					type: "GET", 
 					data: {userPhone: userPhone},
 					dataType: "json",
- 					url: "${pageContext.request.contextPath}/getPhoneVerificationCode",
+ 					url: uri1 + "/getPhoneVerificationCode",
  					success: function() { alert("发送成功"); }
 				}); 
 			}
@@ -20,7 +24,7 @@
 					type: "GET",
 					data: {userName: userName},
 					dataType: "json",
-					url: "${pageContext.request.contextPath}/validateUserName",
+					url: uri1 + "/validateUserName",
 					success: function() { alert("开始验证"); }
 				});
 			}
@@ -32,13 +36,43 @@
 					type: "GET",
 					data: {userPhone: userPhone},
 					dataType: "json",
-					url: "${pageContext.request.contextPath}/validateUserPhone",
+					url: uri1 + "/validateUserPhone",
 					success: function() { alert("开始验证"); }
+				});
+			}
+			
+			function test1() {
+				$.ajax({
+					type: "GET",
+					dataType: "json",
+					url: uri1 + "/test1",
+					success: function() { alert("success");  }
+				});
+			}
+			
+			function test2() {
+				$.ajax({
+					type: "GET",
+					dataType: "json",
+					url: uri1 + "/test2",
+					success: function() { alert("success");  }
+				});
+			}
+			
+			function test3() {
+				$.ajax({
+					type: "GET",
+					dataType: "json",
+					url: uri1 + "/test3",
+					success: function() { alert("success");  }
 				});
 			}
 		</script>
 	</head>
 	<body>
+		<a onclick="test1()" aria-label="Close">test1</a>
+		<a onclick="test2()" aria-label="Close">test2</a>
+		<a onclick="test3()" aria-label="Close">test3</a>
 		<form action="${pageContext.request.contextPath}/register" method="post">
 		<table id="ec_table" class="tableRegion" width="98%">
 			<tr>

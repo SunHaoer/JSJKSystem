@@ -66,7 +66,7 @@ public class RegisterServiceImpl implements RegisterService {
 		boolean flag = true;
 		UserBase userBase = registerMapper.findUserByUserName(userName);
 //System.out.println(userBase);
-		if(userBase != null) {
+		if(userName.isEmpty() || userBase != null) {
 			flag = false; 
 		}
 		return flag;
@@ -75,6 +75,7 @@ public class RegisterServiceImpl implements RegisterService {
 	@Override
 	public boolean userPhoneIsLegal(String userPhone) {
 		boolean result = true;
+		result = result && (!userPhone.isEmpty());
         String regExp = "^((13[0-9])|(14[5,7,9])|(15[0-3,5-9])|(166)|(17[3,5,6,7,8])|(18[0-9])|(19[8,9]))\\d{8}$";
         Pattern pattern = Pattern.compile(regExp);
         Matcher matcher = pattern.matcher(userPhone);
@@ -87,7 +88,7 @@ public class RegisterServiceImpl implements RegisterService {
 	@Override
 	public boolean phoneVerificationCodeIsLegal(String inputPhoneVerificationCode,
 			String standardPhoneVerificationCode) {
-		return (standardPhoneVerificationCode != null) && (standardPhoneVerificationCode.equals(inputPhoneVerificationCode));
+		return (!standardPhoneVerificationCode.isEmpty()) && (standardPhoneVerificationCode.equals(inputPhoneVerificationCode));
 	}
 
 	@Override

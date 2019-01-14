@@ -88,5 +88,14 @@ public class UserBase {
 	public boolean notNullValidation() {
 		return (userName != null) && (userNickname != null) && (userPassword != null) && (userBirthYear != 0) && (userHeight != 0) && (userWeight != 0) && (userPhone != null);
 	}
+	
+	/**
+	 * 去掉string的空格
+	 */
+	public void trimSpace() {
+		userName = userName.trim();
+		userNickname = userNickname.trim();
+		userPhone = userPhone.trim();
+	}
 
 }
