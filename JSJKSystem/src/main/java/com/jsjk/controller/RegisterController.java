@@ -39,51 +39,46 @@ public class RegisterController extends BaseController {
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping(value="/register",produces = {"text/html;charset=utf-8"})
+	@RequestMapping(value="/register", produces = {"text/html;charset=utf-8"})
 	@ResponseBody
-	public String register(UserBase user, HttpSession session, @RequestParam String phoneVerificationCode, @RequestParam String userPassword2){	
+	public String register(UserBase user, HttpSession session, @RequestParam(defaultValue="") String phoneVerificationCode, @RequestParam(defaultValue="") String userPassword2){	
 		JSONObject outputJson = new JSONObject();
+		outputJson.put("result", false);
 		user.trimSpace();
 		phoneVerificationCode = phoneVerificationCode.trim();
-		String inputPhoneVerificationCode = phoneVerificationCode;
-		String standardPhoneVerificationCode = (String) session.getAttribute("phoneVerificationCode");
 		if(user.notNullValidation() 
-		&& registerService.phoneVerificationCodeIsLegal(inputPhoneVerificationCode, standardPhoneVerificationCode)
+		&& registerService.phoneVerificationCodeIsLegal(phoneVerificationCode, (String)session.getAttribute("phoneVerificationCode"))
 		&& registerService.userPasswordIsLegal(user.getUserPassword(), userPassword2)
-		&& registerService.userPhoneIsLegal(user.getUserPhone())
+		&& registerService.userPhoneNotChange(user.getUserPhone(), (String)session.getAttribute("userPhone"))
 		&& registerService.userBirthYearIsLegal(user.getUserBirthYear())) {
-			outputJson.put("test", false);
-			outputJson.put("result", "注册失败error");
 			try {
-				outputJson.put("test", true);
-				outputJson.put("result", "注册成功srccess");
+				outputJson.put("result", true);
 				registerService.saveRegister(user);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} 
-		
 		return outputJson.toString();
 	}
 	
 	/**
 	 * 获取短信验证码
 	 */
-	@RequestMapping(value="/getPhoneVerificationCode",produces = {"text/html;charset=utf-8"})
+	@RequestMapping(value="/getPhoneVerificationCode", produces = {"text/html;charset=utf-8"})
 	@ResponseBody
-	public String getVerificationCode(String userPhone, HttpSession session) {
+	public String getVerificationCode(@RequestParam(defaultValue="") String userPhone, HttpSession session) {
 		JSONObject outputJson = new JSONObject();
-		outputJson.put("test", false);
-		outputJson.put("result", "操作次数过于频繁，请稍后在试error");
+		outputJson.put("result", false);
 		userPhone = userPhone.trim();
         if(registerService.userPhoneIsLegal(userPhone)) {    // 手机号合法
 			String phoneVerificationCode = registerService.createPhoneVerificationCode();
+			session.setAttribute("userPhone", userPhone);
 			session.setAttribute("phoneVerificationCode", phoneVerificationCode);
+			session.setMaxInactiveInterval(600);
 			try {
 				JSONObject receivedJson = registerService.getPhoneVerificationCode(userPhone, phoneVerificationCode);
 				if(Integer.parseInt(receivedJson.getString("result")) >= 0 ) {    // 发送成功
-					outputJson.put("test", true);
-					outputJson.put("result", "短信发送成功success");
+					outputJson.put("result", true);
 				} 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -93,20 +88,32 @@ public class RegisterController extends BaseController {
 	}
 	
 	/**
+	 * 校验verificationCode
+	 * @param verificationCode
+	 * @return
+	 */
+	@RequestMapping(value="/validateVerificationCode", produces = {"text/html;charset=utf-8"})
+	@ResponseBody
+	public String validateVerificationCode(@RequestParam(defaultValue="") String phoneVerificationCode, HttpSession session) {
+		JSONObject outputJson = new JSONObject();
+		boolean flag = registerService.phoneVerificationCodeIsLegal(phoneVerificationCode, (String)session.getAttribute("phoneVerificationCode"));
+		outputJson.put("result", flag);
+		return outputJson.toString();
+	}
+	
+	/**
 	 * userName校验
 	 * @param userName
 	 * @return
 	 */
-	@RequestMapping(value="/validateUserName",produces = {"text/html;charset=utf-8"})
+	@RequestMapping(value="/validateUserName", produces = {"text/html;charset=utf-8"})
 	@ResponseBody
-	public String validateUserName(@RequestParam String userName) {
+	public String validateUserName(@RequestParam(defaultValue="") String userName) {
 		JSONObject outputJson = new JSONObject();
-		outputJson.put("test", "false");
-		outputJson.put("result", "用户名重复error");
+		outputJson.put("result", false);
 		userName = userName.trim();
 		if(registerService.userNameIsLegal(userName)) {
-			outputJson.put("test", "true");
-			outputJson.put("result", "该用户名可以使用success");
+			outputJson.put("result", true);
 		} 
 		return outputJson.toString();
 	}
@@ -116,20 +123,18 @@ public class RegisterController extends BaseController {
 	 * @param userPhone
 	 * @return
 	 */
-	@RequestMapping(value="/validateUserPhone",produces = {"text/html;charset=utf-8"})
+	@RequestMapping(value="/validateUserPhone", produces = {"text/html;charset=utf-8"})
 	@ResponseBody
-	public String validateUserPhone(@RequestParam String userPhone) {
+	public String validateUserPhone(@RequestParam(defaultValue="") String userPhone) {
 		JSONObject outputJson = new JSONObject();
-		outputJson.put("test", false);
-		outputJson.put("result", "手机号已被注册error");
+		outputJson.put("result", false);
 		userPhone = userPhone.trim();
 		if(registerService.userPhoneIsLegal(userPhone)) {
-			outputJson.put("test", true);
-			outputJson.put("result", "该手机号可以使用success");
+			outputJson.put("result", true);
 		} 
 		return outputJson.toString();
 	}
-	
+
 	@RequestMapping(value="/test1")
 	@ResponseBody
 	public String test1() {

@@ -61,5 +61,13 @@ public interface RegisterService {
 	 * @return
 	 */
 	public boolean userPasswordIsLegal(String userPassword, String userPassword2);
+	
+	/**
+	 * 验证userPhone没有改变
+	 * @param userPhone1
+	 * @param userPhone2
+	 * @return
+	 */
+	public boolean userPhoneNotChange(String userPhone1, String userPhone2);
 
 }

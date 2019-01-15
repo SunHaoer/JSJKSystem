@@ -86,7 +86,7 @@ public class UserBase {
 	 * @return
 	 */
 	public boolean notNullValidation() {
-		return (userName != null) && (userNickname != null) && (userPassword != null) && (userBirthYear != 0) && (userHeight != 0) && (userWeight != 0) && (userPhone != null);
+		return (notNullOrEmpyt(userName)) && notNullOrEmpyt(userNickname) && notNullOrEmpyt(userPassword) && (userBirthYear != 0) && (userHeight != 0) && (userWeight != 0) && notNullOrEmpyt(userPhone);
 	}
 	
 	/**
@@ -96,6 +96,15 @@ public class UserBase {
 		userName = userName.trim();
 		userNickname = userNickname.trim();
 		userPhone = userPhone.trim();
+	}
+	
+	/**
+	 * 验证字符串非空
+	 * @param str
+	 * @return
+	 */
+	private boolean notNullOrEmpyt(String str) {
+		return (str != null && !str.isEmpty());
 	}
 
 }

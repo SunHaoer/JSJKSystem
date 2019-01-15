@@ -5,7 +5,7 @@
 		<script type="text/javascript">
 			var uri1 = "http://www.wochi.xin/jsjksystem";
 			var uri2 = "${pageContext.request.contextPath}";
-			uri1 = uri2;
+			uri = uri2;
 			
 			function getPhoneVerificationCode() {
 				var userPhone = $("input[name='userPhone']").val();
@@ -13,8 +13,8 @@
 					type: "GET", 
 					data: {userPhone: userPhone},
 					dataType: "json",
- 					url: uri1 + "/getPhoneVerificationCode",
- 					success: function() { alert("发送成功"); }
+ 					url: uri + "/getPhoneVerificationCode",
+ 					success: function() { alert("验证结束"); }
 				}); 
 			}
 			
@@ -24,20 +24,30 @@
 					type: "GET",
 					data: {userName: userName},
 					dataType: "json",
-					url: uri1 + "/validateUserName",
-					success: function() { alert("开始验证"); }
+					url: uri + "/validateUserName",
+					success: function() { alert("验证结束"); }
 				});
 			}
 			
 			function checkUserPhoneIsLegal() {
-				alert("lala");
 				var userPhone = $("input[name='userPhone']").val();
 				$.ajax({
 					type: "GET",
 					data: {userPhone: userPhone},
 					dataType: "json",
-					url: uri1 + "/validateUserPhone",
-					success: function() { alert("开始验证"); }
+					url: uri + "/validateUserPhone",
+					success: function() { alert("验证结束"); }
+				});
+			}
+			
+			function validatePhoneVerificationCode() {
+				var phoneVerificationCode = $("input[name='phoneVerificationCode']").val();
+				$.ajax({
+					type: "GET",
+					data: {phoneVerificationCode: phoneVerificationCode},
+					dataType: "json",
+					url: uri + "/validateVerificationCode",
+					success: function() { alert("验证结束"); }
 				});
 			}
 			
@@ -67,6 +77,7 @@
 					success: function() { alert("success");  }
 				});
 			}
+			
 		</script>
 	</head>
 	<body>
@@ -113,6 +124,7 @@
 			<tr>
 				<td>验证码：</td>
 				<td><input type="text" name="phoneVerificationCode" /></td>
+				<td><a onclick="validatePhoneVerificationCode()" aria-label="Close">验证验证码</a></td>
 			</tr>	
 			<tr>
 				<input value='ok' type='submit'>

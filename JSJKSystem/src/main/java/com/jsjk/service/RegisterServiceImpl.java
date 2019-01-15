@@ -88,7 +88,7 @@ public class RegisterServiceImpl implements RegisterService {
 	@Override
 	public boolean phoneVerificationCodeIsLegal(String inputPhoneVerificationCode,
 			String standardPhoneVerificationCode) {
-		return (!standardPhoneVerificationCode.isEmpty()) && (standardPhoneVerificationCode.equals(inputPhoneVerificationCode));
+		return twoStringIsEqual(inputPhoneVerificationCode, standardPhoneVerificationCode);
 	}
 
 	@Override
@@ -101,6 +101,15 @@ public class RegisterServiceImpl implements RegisterService {
 
 	@Override
 	public boolean userPasswordIsLegal(String userPassword, String userPasswrod2) {
-		return userPassword.length() >= 6 && userPassword.equals(userPasswrod2);
+		return userPassword.length() >= 6 && twoStringIsEqual(userPassword, userPasswrod2);
+	}
+
+	@Override
+	public boolean userPhoneNotChange(String userPhone1, String userPhone2) {
+		return twoStringIsEqual(userPhone1, userPhone2);
+	}
+	
+	private boolean twoStringIsEqual(String str1, String str2) {
+		return (str1 != null) && (str1.equals(str2));
 	}
 }

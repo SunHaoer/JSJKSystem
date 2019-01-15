@@ -39,6 +39,7 @@
   			`data_body_temperature` int(20) DEFAULT NULL,
   			`data_blood_fat` int(20) DEFAULT NULL,
  			`data_blood_pressure` int(20) DEFAULT NULL,
+ 			`data_heart_rate` int(20) DEFAULT NULL,
   			`data_fatigue` int(20) DEFAULT NULL,
  			`data_time` datetime DEFAULT NULL,
   			PRIMARY KEY (`id`)
