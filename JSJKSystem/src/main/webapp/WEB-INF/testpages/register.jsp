@@ -46,7 +46,7 @@
 					type: "GET",
 					data: {phoneVerificationCode: phoneVerificationCode},
 					dataType: "json",
-					url: uri + "/validateVerificationCode",
+					url: uri + "/validatePhoneVerificationCode",
 					success: function() { alert("验证结束"); }
 				});
 			}
@@ -133,5 +133,3 @@
 		</form>
 	</body>
 </html>
-
-

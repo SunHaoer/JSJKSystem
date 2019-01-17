@@ -26,7 +26,8 @@ public class RegisterServiceImpl implements RegisterService {
 	public boolean saveRegister(UserBase user) {
 		// 此处需要添加数据库事务绑定
 		registerMapper.saveRegister(user);
-		registerMapper.createUserDataTable("user_" + user.getUserId() + "_datatable");	
+		registerMapper.createUserDataTable("user_" + user.getUserId() + "_data_table");	
+		registerMapper.createUserDateFatigueTable("user_" + user.getUserId() + "_fatigue_table");
 		return true;
 	}
 
