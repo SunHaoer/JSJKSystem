@@ -1,0 +1,42 @@
+package com.jsjk.mapper;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.jsjk.pojo.UserBase;
+
+public interface RegisterMapper {
+	
+	/**
+	 * 将注册信息插入数据库
+	 * @param user
+	 */
+	public void saveRegister(UserBase user);
+	
+	/**
+<<<<<<< HEAD
+=======
+	 * 根据注册用户的id建立数据表
+	 * @param userId
+	 */
+	public void createUserDataTable(@Param("tableName")String tableName);
+	
+	/**
+	 * 根据注册用户的id建立日期疲劳度表
+	 * @param string
+	 */
+	public void createUserDateFatigueTable(@Param("tableName")String tableName);
+	
+	/**
+>>>>>>> 450f5a45eefb2260df583f7c1df1b032df6eb637
+	 * 根据userName查user
+	 * @param userName
+	 */
+	public UserBase findUserByUserName(@Param("userName") String userName);
+	
+	/**
+	 * 根据userPhone查user
+	 * @param userPhone
+	 */
+	public UserBase findUserByUserPhone(@Param("userPhone") String userPhone);
+	
+}
