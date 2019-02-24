@@ -13,21 +13,6 @@ public interface RegisterMapper {
 	public void saveRegister(UserBase user);
 	
 	/**
-<<<<<<< HEAD
-=======
-	 * 根据注册用户的id建立数据表
-	 * @param userId
-	 */
-	public void createUserDataTable(@Param("tableName")String tableName);
-	
-	/**
-	 * 根据注册用户的id建立日期疲劳度表
-	 * @param string
-	 */
-	public void createUserDateFatigueTable(@Param("tableName")String tableName);
-	
-	/**
->>>>>>> 450f5a45eefb2260df583f7c1df1b032df6eb637
 	 * 根据userName查user
 	 * @param userName
 	 */

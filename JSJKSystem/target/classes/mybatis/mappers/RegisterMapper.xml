@@ -33,32 +33,6 @@
 		</trim>
 	</insert>
 	
-<<<<<<< HEAD
-=======
-	<update id="createUserDataTable">
-  		CREATE TABLE ${tableName} (
-  			`id` int(20) NOT NULL AUTO_INCREMENT,
-  			`data_body_temperature` int(20) DEFAULT NULL,
-  			`data_blood_fat` int(20) DEFAULT NULL,
- 			`data_blood_pressure` int(20) DEFAULT NULL,
- 			`data_heart_rate` int(20) DEFAULT NULL,
-  			`data_fatigue` int(20) DEFAULT NULL,
- 			`data_date` int(20) DEFAULT NULL,
- 			`data_time` int(20) DEFAULT NULL, 
-  			PRIMARY KEY (`id`)
-		) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-    </update>
-    
-    <update id="createUserDateFatigueTable">
-  		CREATE TABLE ${tableName} (
-  			`date_date` int(20) NOT NULL,
-  			`date_fatigue` int(20) NOT NULL,
-  			`date_rank` int(20) NOT NULL,
-  			PRIMARY KEY (`date_date`)
-		) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-    </update>
-	
->>>>>>> 450f5a45eefb2260df583f7c1df1b032df6eb637
 	<select id="findUserByUserName" resultType="UserBase">
 		select * from user_base
 		where user_name=#{userName}
