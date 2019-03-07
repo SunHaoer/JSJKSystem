@@ -1,7 +1,0 @@
-com\jsjk\mapper\RegisterMapper.class
-com\jsjk\mapper\LoginMapper.class
-com\jsjk\pojo\UserBase.class
-com\jsjk\service\LoginServiceImpl.class
-com\jsjk\service\RegisterService.class
-com\jsjk\service\LoginService.class
-com\jsjk\service\RegisterServiceImpl.class

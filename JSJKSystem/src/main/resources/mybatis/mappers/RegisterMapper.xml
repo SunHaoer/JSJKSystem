@@ -14,22 +14,28 @@
 		insert into user_base
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="userName != null">user_name,</if>
-			<if test="userNickname != null">user_nickname,</if>
 			<if test="userPassword != null">user_password,</if>
-			<if test="userBirthYear">user_birth_year,</if>
+			<if test="userRealname != null">user_realname,</if>
+			<if test="gender">gender,</if>
+			<if test="userBirthYear != null">user_birth_year,</if>
 			<if test="userHeight != null">user_height,</if>
 			<if test="userWeight != null">user_weight,</if>
 			<if test="userPhone != null">user_phone,</if>
+			<if test="emergencyName != null">emergency_name,</if>
+			<if test="emergencyPhone != null">emergency_phone,</if>
 		</trim>
 		values
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="userName != null">#{userName},</if>
-			<if test="userNickname != null">#{userNickname},</if>
 			<if test="userPassword != null">#{userPassword},</if>
+			<if test="userRealname != null">#{userRealname},</if>
+			<if test="gender">#{gender},</if>
 			<if test="userBirthYear != null">#{userBirthYear},</if>
 			<if test="userHeight != null">#{userHeight},</if>
 			<if test="userWeight != null">#{userWeight},</if>
 			<if test="userPhone != null">#{userPhone},</if>
+			<if test="emergencyName != null">#{emergencyName},</if>
+			<if test="emergencyPhone != null">#{emergencyPhone},</if>
 		</trim>
 	</insert>
 	

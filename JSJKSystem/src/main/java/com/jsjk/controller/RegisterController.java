@@ -38,7 +38,7 @@ public class RegisterController extends BaseController {
 	 */
 	@RequestMapping(value="/register")
 	@ResponseBody
-	public String register(UserBase user, @RequestParam(value="userPassword2", defaultValue="") String userPassword2){	
+	public String register(UserBase user){	
 		JSONObject outputJson = new JSONObject();
 		outputJson.put("result", false);
 		user.trimSpace();
