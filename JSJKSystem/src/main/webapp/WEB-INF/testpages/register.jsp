@@ -81,9 +81,6 @@
 		</script>
 	</head>
 	<body>
-		<a onclick="test1()" aria-label="Close">test1</a>
-		<a onclick="test2()" aria-label="Close">test2</a>
-		<a onclick="test3()" aria-label="Close">test3</a>
 		<form action="${pageContext.request.contextPath}/register" method="post">
 		<table id="ec_table" class="tableRegion" width="98%">
 			<tr>
@@ -120,12 +117,7 @@
 				<td><input type="text" name="userPhone" /></td>
 				<td><a onclick="checkUserPhoneIsLegal()" aria-label="Close">验证手机</a></td>
 				<td><a onclick="getPhoneVerificationCode()" aria-label="Close">获取验证码</a></td>
-			</tr>	
-			<tr>
-				<td>验证码：</td>
-				<td><input type="text" name="phoneVerificationCode" /></td>
-				<td><a onclick="validatePhoneVerificationCode()" aria-label="Close">验证验证码</a></td>
-			</tr>	
+			</tr>		
 			<tr>
 				<input value='ok' type='submit'>
 			</tr>					

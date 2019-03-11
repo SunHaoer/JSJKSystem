@@ -1,10 +1,5 @@
 package com.jsjk.controller;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -43,17 +38,11 @@ public class RegisterController extends BaseController {
 	 */
 	@RequestMapping(value="/register")
 	@ResponseBody
-	public String register(UserBase user, HttpSession session, @RequestParam(value="userPassword2", defaultValue="") String userPassword2, @RequestParam(value="userPhoneVerificationCode", defaultValue="") String phoneVerificationCode){	
-		System.out.println(user + "\n\n" + "phoneVerficationCode=" + phoneVerificationCode + "userPasswrod2=" + userPassword2 + "\n\n");		
+	public String register(UserBase user){	
 		JSONObject outputJson = new JSONObject();
 		outputJson.put("result", false);
 		user.trimSpace();
-		phoneVerificationCode = phoneVerificationCode.trim();
-		if(user.notNullValidation() 
-		&& registerService.phoneVerificationCodeIsLegal(phoneVerificationCode, (String)session.getAttribute("phoneVerificationCode"))
-		&& registerService.userPasswordIsLegal(user.getUserPassword(), userPassword2)
-		&& registerService.userPhoneNotChange(user.getUserPhone(), (String)session.getAttribute("userPhone"))
-		&& registerService.userBirthYearIsLegal(user.getUserBirthYear())) {
+		if(true) {
 			try {
 				outputJson.put("result", true);
 				registerService.saveRegister(user);
@@ -72,7 +61,6 @@ public class RegisterController extends BaseController {
 	@RequestMapping(value="/validateUserName")
 	@ResponseBody
 	public String validateUserName(@RequestParam(value="userName", defaultValue="") String userName) {
-//System.out.println(userName + "\n\n");
 		JSONObject outputJson = new JSONObject();
 		outputJson.put("result", false);
 		userName = userName.trim();
@@ -90,89 +78,13 @@ public class RegisterController extends BaseController {
 	@RequestMapping(value="/validateUserPhone")
 	@ResponseBody
 	public String validateUserPhone(@RequestParam(value="userPhone", defaultValue="") String userPhone) {
-System.out.println(userPhone + "\n\n");
 		JSONObject outputJson = new JSONObject();
 		outputJson.put("result", false);
 		userPhone = userPhone.trim();
-		if(registerService.userPhoneIsLegal(userPhone)) {
+		if(true) {
 			outputJson.put("result", true);
 		} 
 		return outputJson.toString();
 	}
 	
-	/**
-	 * 获取短信验证码
-	 */
-	@RequestMapping(value="/getPhoneVerificationCode")
-	@ResponseBody
-	public String getVerificationCode(@RequestParam(value="userPhone", defaultValue="") String userPhone, HttpSession session) {
-		session.setAttribute("phoneVerificationCode", "0000");
-System.out.println(userPhone);
-		JSONObject outputJson = new JSONObject();
-		outputJson.put("result", false);
-		userPhone = userPhone.trim();
-        if(registerService.userPhoneIsLegal(userPhone)) {    // 手机号合法
-			String phoneVerificationCode = registerService.createPhoneVerificationCode();
-			session.setAttribute("userPhone", userPhone);
-			session.setAttribute("phoneVerificationCode", phoneVerificationCode);
-System.out.println((String)session.getAttribute("phoneVerificationCode") + "\n\n\n");
-			try {
-				JSONObject receivedJson = registerService.getPhoneVerificationCode(userPhone, phoneVerificationCode);
-				if(Integer.parseInt(receivedJson.getString("result")) >= 0 ) {    // 发送成功
-					outputJson.put("result", true);
-				} 
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-        } 
-		return outputJson.toString();
-	}
-	
-	/**
-	 * 校验verificationCode
-	 * @param verificationCode
-	 * @return
-	 */
-	@RequestMapping(value="/validatePhoneVerificationCode", produces = {"text/html;charset=utf-8"})
-	@ResponseBody
-	public String validatePhoneVerificationCode(@RequestParam(value="userPhoneVerificationCode", defaultValue="") String phoneVerificationCode, HttpSession session) {
-System.out.println(phoneVerificationCode + "==" + (String)session.getAttribute("phoneVerificationCode") + "==" + session.getAttribute("userPhone") + "\n\n");		
-		JSONObject outputJson = new JSONObject();
-		boolean flag = registerService.phoneVerificationCodeIsLegal(phoneVerificationCode, (String)session.getAttribute("phoneVerificationCode"));
-		outputJson.put("result", flag);
-		return outputJson.toString();
-	}
-
-	@RequestMapping(value="/test1", method = RequestMethod.POST)
-	@ResponseBody
-	public String test1() {
-		JSONObject outputJson = new JSONObject();
-		outputJson.put("result", "test1");
-		return outputJson.toString();
-	}
-	
-	@RequestMapping(value="/test2")
-	@ResponseBody
-	public String test2(ServletRequest servletRequest, ServletResponse servletResponse, UserBase user, HttpSession session, @RequestParam(value="userPhoneVerificationCode") String phoneVerificationCode, @RequestParam(defaultValue="") String userPassword2) {
-//        HttpServletResponse response = (HttpServletResponse) servletResponse;
-        //String origin = (String) servletRequest.getRemoteHost()+":"+servletRequest.getRemotePort();
-//        response.setHeader("Access-Control-Allow-Origin", "*");
-//        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
-//        response.setHeader("Access-Control-Max-Age", "3600");
-//        response.setHeader("Access-Control-Allow-Headers", "x-requested-with,Authorization");
-//        response.setHeader("Access-Control-Allow-Credentials","true");
-        JSONObject outputJson = new JSONObject();
-System.out.println(user + "\n\n" + "phoneVerficationCode=" + phoneVerificationCode + "userPasswrod2=" + userPassword2 + "\n\n");
-        outputJson.put("result", "test2");
-		return outputJson.toString();
-	}
-	
-	@RequestMapping(value="/test3")
-	@ResponseBody
-	public String test3(String userName) {
-		JSONObject outputJson = new JSONObject();
-System.out.println(userName);
-		outputJson.put("result", "啦啦啦，哈哈哈");
-		return outputJson.toString();
-	}
 }
