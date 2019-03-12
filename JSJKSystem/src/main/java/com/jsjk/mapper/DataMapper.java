@@ -9,9 +9,11 @@ import com.jsjk.pojo.DateData;
 
 public interface DataMapper {
 
-	List<Data> getDataByDate(@Param("date") String date);
+	List<Data> getDataByDate();
 
 	List<DateData> getData();
+
+	void setData(@Param("dataDate")String dataDate, @Param("dataTime")String dataTime, @Param("heartRate")int heartRate, @Param("bloodPressure1")int bloodPressure1, @Param("bloodPressure2")int bloodPressure2, @Param("alcoholConcentration")int alcoholConcentration, @Param("fatigue")int fatigue);
 
 
 }

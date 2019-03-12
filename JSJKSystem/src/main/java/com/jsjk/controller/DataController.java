@@ -1,12 +1,17 @@
 package com.jsjk.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import org.apache.taglibs.standard.lang.jstl.Literal;
+import org.apache.taglibs.standard.tag.el.sql.SetDataSourceTag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.w3c.dom.css.ElementCSSInlineStyle;
 
@@ -27,18 +32,43 @@ public class DataController {
 	@Autowired
 	private DataService dataService;
 	
+	@RequestMapping(value="/setData")
+	@ResponseBody
+	public String setData(@RequestParam(defaultValue = "1")int heartRate, @RequestParam(defaultValue = "1")int bloodPressure1, @RequestParam(defaultValue = "1")int bloodPressure2, @RequestParam(defaultValue = "1")int alcoholConcentration) {
+		JSONObject outputJson = new JSONObject();
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd,HHmmss");		// 设置日期格式
+		String timeStr = df.format(new Date());		// new Date()为获取当前系统时间
+		String dataDate = timeStr.split(",")[0];
+		String dataTime = timeStr.split(",")[1];
+		if(Integer.parseInt(dataTime) - UserInfo.nowTime > 20) {
+			System.out.println(1);
+			UserInfo.timeCnt = 0;
+		} else {
+			UserInfo.timeCnt++;
+			System.out.println(2);
+		}
+		System.out.println(UserInfo.nowTime + "\n\n");
+		UserInfo.nowTime = Integer.parseInt(dataTime);
+		int fatigue = UserInfo.timeCnt;
+		dataService.setData(dataDate, dataTime, heartRate, bloodPressure1, bloodPressure2, alcoholConcentration, fatigue);
+		UserInfo.timeCnt++;
+		outputJson.put("success", true);
+		outputJson.put("message", "");
+		return outputJson.toString();
+	}
+	
 	/**
 	 * 获取信息根据日期
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping(value="/getDataByDate")
+	@RequestMapping(value="/getLastData")
 	@ResponseBody
-	public String getDataByDate(String date){	
+	public String getLastData(){	
 		JSONObject outputJson = new JSONObject();
 		outputJson.put("success", true);
-		List<Data> list = dataService.getDataByDate(date);
-		Data data = list.get(0);
+		List<Data> list = dataService.getDataByDate();
+		Data data = list.get(list.size() - 1);
 		System.out.println(data.toString() + "\n\n");
 		DataViewModel viewData = new DataViewModel(data.getHeartRate(), data.getFatigue(), data.getBloodPressure1(), data.getBloodPressure2(), data.getAlcoholConcentration());
 		if(true) { 

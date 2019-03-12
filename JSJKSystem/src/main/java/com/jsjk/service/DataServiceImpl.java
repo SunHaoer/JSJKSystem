@@ -16,8 +16,8 @@ public class DataServiceImpl implements DataService {
 	private DataMapper dataMapper;
 
 	@Override
-	public List<Data> getDataByDate(String date) {
-		List<Data> list = dataMapper.getDataByDate(date);
+	public List<Data> getDataByDate() {
+		List<Data> list = dataMapper.getDataByDate();
 		return list;
 	}
 
@@ -25,6 +25,13 @@ public class DataServiceImpl implements DataService {
 	public List<DateData> getData() {
 		List<DateData> list = dataMapper.getData();
 		return list;
+	}
+
+	@Override
+	public void setData(String dataDate, String dataTime, int heartRate, int bloodPressure1, int bloodPressure2,
+			int alcoholConcentration, int fatigue) {
+		dataMapper.setData(dataDate, dataTime, heartRate, bloodPressure1, bloodPressure2, alcoholConcentration, fatigue);
+		
 	}
 
 }
