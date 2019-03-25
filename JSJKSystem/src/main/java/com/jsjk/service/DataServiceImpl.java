@@ -24,6 +24,7 @@ public class DataServiceImpl implements DataService {
 	@Override
 	public List<DateData> getData() {
 		List<DateData> list = dataMapper.getData();
+		System.out.println(list.get(0).getData_synthesize());
 		return list;
 	}
 

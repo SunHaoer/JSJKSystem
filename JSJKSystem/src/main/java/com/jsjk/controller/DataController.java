@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.helpers.DateTimeDateFormat;
 import org.apache.taglibs.standard.lang.jstl.Literal;
 import org.apache.taglibs.standard.tag.el.sql.SetDataSourceTag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import com.jsjk.utils.UserInfo;
 import com.jsjk.vewModel.DataViewModel;
 
 import net.sf.json.JSONObject;
+import net.sf.jsqlparser.statement.replace.Replace;
 
 @CrossOrigin
 @Controller
@@ -121,9 +123,15 @@ public class DataController {
 	@ResponseBody
 	public String getData(){	
 		JSONObject outputJson = new JSONObject();
-		outputJson.put("success", false);
+		outputJson.put("success", true);
 		List<DateData> list = dataService.getData();
+		for(DateData dateData : list) {
+			dateData.setDataDate(dateData.getDataDate().replace("y", "年"));
+			dateData.setDataDate(dateData.getDataDate().replace("m", "月"));
+			dateData.setDataDate(dateData.getDataDate().replace("d", "日") );
+		}
 		outputJson.put("data", list);
+		System.out.println(list.get(0).getDataDate());
 		return outputJson.toString();
 	}
 }
